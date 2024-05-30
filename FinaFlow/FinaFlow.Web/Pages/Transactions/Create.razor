@@ -1,0 +1,33 @@
+@page "/transacoes/adicionar"
+@inherits CreateTransactionPage
+
+<MudText Typo="Typo.h3">Nova Transação</MudText>
+
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+        
+        <MudTextField Label="Título"
+                      HelperText="Campo obrigatório"
+                      @bind-Value="InputModel.Title"
+                      For="@(() => InputModel.Title)"/>
+
+        <MudCheckBox Label="Descrição"
+                      HelperText="Campo obrigatório"
+                      @bind-Value="InputModel.Type"
+                      For="@(() => InputModel.Type)"/>
+        
+        @if (IsBusy)
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+        }
+        else
+        {
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary">
+                Salvar
+            </MudButton>
+        }
+    </EditForm>
+</MudPaper>
